@@ -212,7 +212,6 @@ class TicketPanel(discord.ui.View):
 async def on_ready():
     bot.add_view(TicketPanel())
     bot.add_view(TicketControls()) 
-    bot.add_view(VouchButton())
     async with aiosqlite.connect("warns.db") as db:
         await db.execute("""
         CREATE TABLE IF NOT EXISTS warns(
