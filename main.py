@@ -980,6 +980,11 @@ async def warn(
                 f"✅ Cleared {removed} warn(s) for {user.mention}.",
                 ephemeral=True
             )
+
+@bot.command()
+async def sync(ctx):
+    synced = await bot.tree.sync()
+    await ctx.send(f"Synced {len(synced)} commands")
             
 # ---------------- RUN BOT ----------------
 
