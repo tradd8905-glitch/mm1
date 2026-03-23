@@ -1153,7 +1153,7 @@ async def manageroles(
     embed.set_footer(text="Powered by Sab Market")
 
     # 📢 Send to log channel
-    LOG_channel = interaction.guild.get_channel(MODLOG_CHANNEL_ID)
+    log_channel = interaction.guild.get_channel(MODLOG_CHANNEL_ID)
     if log_channel:
         await log_channel.send(embed=embed)
 
