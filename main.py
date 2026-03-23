@@ -697,7 +697,6 @@ async def manageban(
     # role hierarchy check
     if member:
 
-        # cannot ban yourself
         if member == user:
             await interaction.response.send_message(
                 "❌ You can't ban yourself.",
@@ -705,7 +704,6 @@ async def manageban(
             )
             return
 
-        # cannot ban higher or equal role than user
         if member.top_role >= user.top_role:
             await interaction.response.send_message(
                 "❌ You can't ban someone with higher or equal role.",
@@ -713,7 +711,6 @@ async def manageban(
             )
             return
 
-        # bot hierarchy check
         if member.top_role >= guild.me.top_role:
             await interaction.response.send_message(
                 "❌ My role is lower than the target.",
@@ -721,13 +718,15 @@ async def manageban(
             )
             return
 
-        # cannot ban bot
         if member == guild.me:
             await interaction.response.send_message(
                 "❌ I can't ban myself.",
                 ephemeral=True
             )
             return
+
+    # ✅ FIX: time_now added
+    time_now = datetime.now().strftime("%m/%d/%Y, %I:%M:%S %p")
 
     # embed style
     if action.value == "ban":
@@ -743,23 +742,9 @@ async def manageban(
         timestamp=datetime.utcnow()
     )
 
-    embed.add_field(
-        name="Moderator",
-        value=user.mention,
-        inline=False
-    )
-
-    embed.add_field(
-        name="Target",
-        value=f"{target} ({target.id})",
-        inline=False
-    )
-
-    embed.add_field(
-        name="Reason",
-        value=reason,
-        inline=False
-    )
+    embed.add_field(name="Moderator", value=user.mention, inline=False)
+    embed.add_field(name="Target", value=f"{target} ({target.id})", inline=False)
+    embed.add_field(name="Reason", value=reason, inline=False)
     embed.add_field(name="Time", value=time_now, inline=False)
 
     embed.add_field(
@@ -771,15 +756,13 @@ async def manageban(
     embed.set_image(url=evidence.url)
     embed.set_footer(text="Powered by Sab Market")
 
-      try:
-
+    # ✅ FIX: indentation
+    try:
         if action.value == "ban":
-
             if member:
                 await guild.ban(member, reason=reason)
             else:
                 await guild.ban(discord.Object(id=target.id), reason=reason)
-
         else:
             await guild.unban(discord.Object(id=target.id))
 
