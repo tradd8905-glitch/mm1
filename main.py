@@ -844,7 +844,7 @@ async def warn(
             embed.add_field(name="Case", value=f"#{case_id}")
             embed.add_field(name="Moderator", value=interaction.user.mention, inline=False)
             embed.add_field(name="Reason", value=reason, inline=False)
-            embed.set_footer(text="Powered by Kakashi")
+            embed.set_footer(text="Powered by Sab Market")
 
             log_channel = interaction.guild.get_channel(MODLOG_CHANNEL_ID)
             if log_channel:
@@ -923,7 +923,7 @@ async def warn(
                 value=reason if reason else "No reason provided",
                 inline=False
             )
-            embed.set_footer(text="Powered by Kakashi")
+            embed.set_footer(text="Powered by Sab Market")
 
             log_channel = interaction.guild.get_channel(MODLOG_CHANNEL_ID)
             if log_channel:
