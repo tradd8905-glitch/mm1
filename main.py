@@ -969,7 +969,7 @@ async def warn(
                 value=reason if reason else "No reason provided",
                 inline=False
             )
-            embed.set_footer(text="Powered by Kakashi")
+            embed.set_footer(text="Powered by Sab Market")
 
             log_channel = interaction.guild.get_channel(MODLOG_CHANNEL_ID)
             if log_channel:
