@@ -1032,20 +1032,20 @@ async def manageroles(
     if COMMANDER_ROLE_ID in user_roles:
         allowed_roles = [MIDDLEMAN_ROLE_ID]
 
-    elif SUPREME_LEAD_ROLE_ID in user_roles:
+    if SUPREME_LEAD_ROLE_ID in user_roles:
         allowed_roles = [
             MIDDLEMAN_ROLE_ID,
             HEAD_MM_ROLE_ID
         ]
 
-    elif OPERATIONS_LEAD_ROLE_ID in user_roles:
+    if OPERATIONS_LEAD_ROLE_ID in user_roles:
         allowed_roles = [
             MIDDLEMAN_ROLE_ID,
             HEAD_MM_ROLE_ID,
             MM_MANAGER_ROLE_ID
         ]
 
-    elif CHIEF_LEAD_ROLE_ID in user_roles:
+    if CHIEF_LEAD_ROLE_ID in user_roles:
         allowed_roles = [
             MIDDLEMAN_ROLE_ID,
             HEAD_MM_ROLE_ID,
@@ -1053,7 +1053,7 @@ async def manageroles(
             MODERATOR_ROLE_ID
         ]
 
-    elif TEAM_LEAD_ROLE_ID in user_roles:
+    if TEAM_LEAD_ROLE_ID in user_roles:
         allowed_roles = [
             MIDDLEMAN_ROLE_ID,
             HEAD_MM_ROLE_ID,
@@ -1062,7 +1062,7 @@ async def manageroles(
             HEAD_MOD_ROLE_ID
         ]
 
-    elif MANAGER_ROLE_ID in user_roles:
+    if MANAGER_ROLE_ID in user_roles:
         allowed_roles = [
             MIDDLEMAN_ROLE_ID,
             HEAD_MM_ROLE_ID,
@@ -1072,7 +1072,7 @@ async def manageroles(
             ADMIN_ROLE_ID
         ]
 
-    elif VICE_PRESIDENT_ROLE_ID in user_roles:
+    if VICE_PRESIDENT_ROLE_ID in user_roles:
         allowed_roles = [
             MIDDLEMAN_ROLE_ID,
             HEAD_MM_ROLE_ID,
@@ -1083,7 +1083,7 @@ async def manageroles(
             COMMANDER_ROLE_ID
         ]
 
-    elif PRESIDENT_ROLE_ID in user_roles:
+    if PRESIDENT_ROLE_ID in user_roles:
         allowed_roles = [
             MIDDLEMAN_ROLE_ID,
             HEAD_MM_ROLE_ID,
