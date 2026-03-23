@@ -760,11 +760,18 @@ async def manageban(
         value=reason,
         inline=False
     )
+    embed.add_field(name="Time", value=time_now, inline=False)
+
+    embed.add_field(
+        name="Evidence",
+        value=f"[{evidence.filename}]({evidence.url}) (image)",
+        inline=False
+    )
 
     embed.set_image(url=evidence.url)
-    embed.set_footer(text="Moderation System")
+    embed.set_footer(text="Powered by Sab Market")
 
-    try:
+      try:
 
         if action.value == "ban":
 
