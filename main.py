@@ -15,6 +15,18 @@ VERIFY_ROLE_ID = 1453143972133212298
 BAN_ROLE_ID = 1485292575630819458
 MODLOG_CHANNEL_ID = 1485296402048225291
 ADMIN_ROLE_ID = 1471646708210466967
+COMMANDAR_ROLE_ID = 1471646742389981356
+SUPREME_LEAD_ROLE_ID = 1471646927127838812
+OPERATIONS_LEAD_ROLE_ID = 1471646983541362982
+CHIEF_ROLE_ID = 1471647061123268864
+TEAM_LEAD_ROLE_ID = 1471647097466912788
+MANAGER_ROLE_ID = 1471647170129039421
+VICE_PRESIDENT_ROLE_ID = 1471647271291715655
+PRESIDENT_ROLE_ID = 1471647310176850011
+HEADMM_ROLE_ID = 1471646503398281453
+MM_MANAGER_ROLE_ID = 1471646542774403092
+MODERATOR_ROLE_ID = 1471646587121045685
+HEAD_MOD_ROLE_ID = 1471646635372056771
 
 intents = discord.Intents.default()
 intents.messages = True
@@ -979,6 +991,177 @@ async def warn(
                 f"✅ Cleared {removed} warn(s) for {user.mention}.",
                 ephemeral=True
             )
+
+from datetime import datetime
+
+@bot.tree.command(name="manageroles", description="Advanced role manager")
+@app_commands.describe(
+    target="User",
+    action="Give or remove role",
+    role="Select role",
+    reason="Reason",
+    evidence="Upload proof image"
+)
+@app_commands.choices(action=[
+    app_commands.Choice(name="Give", value="give"),
+    app_commands.Choice(name="Remove", value="remove")
+])
+async def manageroles(
+    interaction: discord.Interaction,
+    target: discord.Member,
+    action: app_commands.Choice[str],
+    role: discord.Role,
+    reason: str,
+    evidence: discord.Attachment
+):
+
+    user_roles = [r.id for r in interaction.user.roles]
+
+    # 📸 Evidence check
+    if not evidence.content_type or not evidence.content_type.startswith("image"):
+        await interaction.response.send_message(
+            "❌ Evidence must be an image.",
+            ephemeral=True
+        )
+        return
+
+    # 🔒 PERMISSION SYSTEM
+
+    allowed_roles = []
+
+    if COMMANDER_ROLE_ID in user_roles:
+        allowed_roles = [MIDDLEMAN_ROLE_ID]
+
+    elif SUPREME_LEAD_ROLE_ID in user_roles:
+        allowed_roles = [
+            MIDDLEMAN_ROLE_ID,
+            HEAD_MM_ROLE_ID
+        ]
+
+    elif OPERATIONS_LEAD_ROLE_ID in user_roles:
+        allowed_roles = [
+            MIDDLEMAN_ROLE_ID,
+            HEAD_MM_ROLE_ID,
+            MM_MANAGER_ROLE_ID
+        ]
+
+    elif CHIEF_LEAD_ROLE_ID in user_roles:
+        allowed_roles = [
+            MIDDLEMAN_ROLE_ID,
+            HEAD_MM_ROLE_ID,
+            MM_MANAGER_ROLE_ID,
+            MODERATOR_ROLE_ID
+        ]
+
+    elif TEAM_LEAD_ROLE_ID in user_roles:
+        allowed_roles = [
+            MIDDLEMAN_ROLE_ID,
+            HEAD_MM_ROLE_ID,
+            MM_MANAGER_ROLE_ID,
+            MODERATOR_ROLE_ID,
+            HEAD_MOD_ROLE_ID
+        ]
+
+    elif MANAGER_ROLE_ID in user_roles:
+        allowed_roles = [
+            MIDDLEMAN_ROLE_ID,
+            HEAD_MM_ROLE_ID,
+            MM_MANAGER_ROLE_ID,
+            MODERATOR_ROLE_ID,
+            HEAD_MOD_ROLE_ID,
+            ADMIN_ROLE_ID
+        ]
+
+    elif VICE_PRESIDENT_ROLE_ID in user_roles:
+        allowed_roles = [
+            MIDDLEMAN_ROLE_ID,
+            HEAD_MM_ROLE_ID,
+            MM_MANAGER_ROLE_ID,
+            MODERATOR_ROLE_ID,
+            HEAD_MOD_ROLE_ID,
+            ADMIN_ROLE_ID,
+            COMMANDER_ROLE_ID
+        ]
+
+    elif PRESIDENT_ROLE_ID in user_roles:
+        allowed_roles = [
+            MIDDLEMAN_ROLE_ID,
+            HEAD_MM_ROLE_ID,
+            MM_MANAGER_ROLE_ID,
+            MODERATOR_ROLE_ID,
+            HEAD_MOD_ROLE_ID,
+            ADMIN_ROLE_ID,
+            COMMANDER_ROLE_ID,
+            SUPREME_LEAD_ROLE_ID
+        ]
+
+    else:
+        await interaction.response.send_message(
+            "❌ You don't have permission.",
+            ephemeral=True
+        )
+        return
+
+    # ❌ Restrict role
+    if role.id not in allowed_roles:
+        await interaction.response.send_message(
+            "❌ You cannot manage this role.",
+            ephemeral=True
+        )
+        return
+
+    # 🔄 Perform action
+    try:
+        if action.value == "give":
+            await target.add_roles(role)
+            title = "Role Given ✅"
+            color = discord.Color.green()
+        else:
+            await target.remove_roles(role)
+            title = "Role Removed ❌"
+            color = discord.Color.red()
+
+    except Exception as e:
+        await interaction.response.send_message(
+            f"Error: {e}",
+            ephemeral=True
+        )
+        return
+
+    # 🕒 Time
+    time_now = datetime.now().strftime("%m/%d/%Y, %I:%M:%S %p")
+
+    # 📜 EMBED (MATCHES YOUR IMAGE)
+    embed = discord.Embed(
+        title=title,
+        color=color
+    )
+
+    embed.add_field(name="Actioned By", value=interaction.user.mention, inline=False)
+    embed.add_field(name="Target User", value=target.mention, inline=False)
+    embed.add_field(name="Role", value=role.name, inline=False)
+    embed.add_field(name="Reason", value=reason, inline=False)
+    embed.add_field(name="Time", value=time_now, inline=False)
+
+    embed.add_field(
+        name="Evidence",
+        value=f"[{evidence.filename}]({evidence.url}) (image)",
+        inline=False
+    )
+
+    embed.set_image(url=evidence.url)
+    embed.set_footer(text="Powered by Sab Market")
+
+    # 📢 Send to log channel
+    MODLOG_channel = interaction.guild.get_channel(MODLOG_CHANNEL_ID)
+    if log_channel:
+        await log_channel.send(embed=embed)
+
+    # ✅ Confirmation
+    await interaction.response.send_message(
+        f"✅ Done for {target.mention}",
+        ephemeral=True
+    )
 
 @bot.command()
 async def sync(ctx):
