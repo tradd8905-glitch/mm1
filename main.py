@@ -267,7 +267,7 @@ async def panel(interaction: discord.Interaction):
         description=text,
         color=discord.Color.green()
     )
-    embed.set_footer(text="Powered by Sab Market")
+    embed.set_footer(text="Powered by Koodas Trading Camp")
 
     # Send the panel message with the TicketPanel buttons
     await interaction.channel.send(embed=embed, view=TicketPanel())
