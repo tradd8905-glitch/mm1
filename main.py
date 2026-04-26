@@ -83,7 +83,7 @@ async def save_transcript(channel, closer, guild):
         inline=False
     )
 
-    embed.set_footer(text="Powered by Koodas Trading Camp")  
+    embed.set_footer(text="Powered by Steak MM Services")  
 
     if log_channel:
         await log_channel.send(embed=embed, file=file)
@@ -133,7 +133,7 @@ class TicketControls(discord.ui.View):
             description=f"{interaction.user.mention} will be your middleman for today.",
             color=discord.Color.green()
         )
-        embed.set_footer(text="Powered by rustynickle40")
+        embed.set_footer(text="Powered by Steak MM Services")
 
         await interaction.followup.send(embed=embed)
 
@@ -153,7 +153,7 @@ class TicketControls(discord.ui.View):
             description="⏳ Closing ticket in 5 seconds...",
             color=discord.Color.green()
         )
-        embed.set_footer(text="Powered by rustynickle40")
+        embed.set_footer(text="Powered by Steak MM Services")
 
         await interaction.response.send_message(embed=embed)
 
@@ -207,7 +207,7 @@ class TicketPanel(discord.ui.View):
             description=welcome_message,
             color=discord.Color.green()
         )
-        embed.set_footer(text="Powered by Koodas Trading Camp")
+        embed.set_footer(text="Powered by Steak MM Services")
 
         # Send embed + buttons in ticket channel
         await channel.send(
@@ -258,7 +258,7 @@ async def panel(interaction: discord.Interaction):
 
     # Embed for the panel message
     text = (
-        "**Koodas Trading Camp**\n\n"
+        "**Steak MM Services**\n\n"
         "Click the button below to **Request a Middleman**.\n\n"
         "**How it works**\n"
         "• Seller gives item to MM\n"
@@ -272,7 +272,7 @@ async def panel(interaction: discord.Interaction):
         description=text,
         color=discord.Color.green()
     )
-    embed.set_footer(text="Powered by Koodas Trading Camp")
+    embed.set_footer(text="Powered by Steak MM Services")
 
     # Send the panel message with the TicketPanel buttons
     await interaction.channel.send(embed=embed, view=TicketPanel())
@@ -312,7 +312,7 @@ async def middleman(interaction: discord.Interaction):
     )
 
     embed.set_image(url="https://cdn.discordapp.com/attachments/1436674705930063875/1479860750993592530/middleman1_2-1.webp?ex=69ae3bf9&is=69acea79&hm=78e2e3a5379a861858e1c8f7a94504268edc4807585a3d63b95a3411875aa577")
-    embed.set_footer(text="Powered by Koodas Trading Camp")
+    embed.set_footer(text="Powered by Steak MM Services")
 
     await interaction.response.send_message(embed=embed)
 
@@ -351,7 +351,7 @@ async def add(interaction: discord.Interaction, user: discord.Member):
         color=discord.Color.green()
     )
 
-    embed.set_footer(text="Powered by Koodas Trading Camp")
+    embed.set_footer(text="Powered by Steak MM Services")
 
     await interaction.response.send_message(embed=embed)
 
@@ -406,7 +406,7 @@ async def transfer(interaction: discord.Interaction, user: discord.Member):
         color=discord.Color.green()
     )
 
-    embed.set_footer(text="Powered by Koodas Trading Camp")
+    embed.set_footer(text="Powered by Steak MM Services")
 
     await interaction.response.send_message(embed=embed)
 
@@ -429,7 +429,7 @@ async def close(interaction: discord.Interaction):
         color=discord.Color.green()
     )
 
-    embed.set_footer(text="Powered by Koodas Trading Camp")
+    embed.set_footer(text="Powered by Steak MM Services")
 
     await interaction.response.send_message(embed=embed)
 
@@ -466,7 +466,7 @@ async def middleman1(interaction: discord.Interaction):
     )
 
     embed.set_image(url="https://cdn.discordapp.com/attachments/1479495822591656018/1479854700898816111/middleman2_1.webp?ex=69ae3657&is=69ace4d7&hm=4da9678b97798bbb3e2f445931b8e9677da6210f478756484ec52bb66d41aa25")
-    embed.set_footer(text="Powered by Koodas Trading Camp")
+    embed.set_footer(text="Powered by Steak MM Services")
 
     await interaction.response.send_message(embed=embed)
 
@@ -496,7 +496,7 @@ async def vouch(interaction: discord.Interaction, user: discord.Member, reason: 
     embed.add_field(name="Vouched By", value=interaction.user.mention, inline=False)
 
     embed.set_thumbnail(url=user.display_avatar.url)
-    embed.set_footer(text="Powered by Koodas Trading Camp")
+    embed.set_footer(text="Powered by Steak MM Services")
 
     # Button view
     class VouchButton(discord.ui.View):
@@ -534,7 +534,7 @@ async def vouch(interaction: discord.Interaction, user: discord.Member, reason: 
             )
 
             details_embed.set_thumbnail(url=user.display_avatar.url)
-            details_embed.set_footer(text="Powered by Koodas Trading Camp")
+            details_embed.set_footer(text="Powered by Steak MM Services")
 
             await interaction2.response.send_message(embed=details_embed, ephemeral=True)
 
@@ -576,7 +576,7 @@ class VerifyView(discord.ui.View):
             description="✅ You accepted the opportunity.",
             color=discord.Color.green()
         )
-        embed.set_footer(text="Powered by Koodas Trading Camp")
+        embed.set_footer(text="Powered by Steak MM Services")
 
         await interaction.response.edit_message(embed=embed, view=None)
 
@@ -594,7 +594,7 @@ class VerifyView(discord.ui.View):
             description="❌ You declined the opportunity.",
             color=discord.Color.red()
         )
-        embed.set_footer(text="Powered by Koodas Trading Camp")
+        embed.set_footer(text="Powered by Steak MM Services")
 
         await interaction.response.edit_message(embed=embed, view=None)
 
@@ -635,7 +635,7 @@ async def verify(interaction: discord.Interaction, user: discord.Member):
         color=discord.Color.green()
     )
 
-    scam_embed.set_footer(text="Powered by Koodas Trading Camp")
+    scam_embed.set_footer(text="Powered by Steak MM Services")
 
     verify_embed = discord.Embed(
         description=(
@@ -646,7 +646,7 @@ async def verify(interaction: discord.Interaction, user: discord.Member):
         color=discord.Color.orange()
     )
 
-    verify_embed.set_footer(text="Koodas Trading Camp")
+    verify_embed.set_footer(text="Steak MM Services")
 
     view = VerifyView(user)
 
@@ -759,7 +759,7 @@ async def manageban(
     )
 
     embed.set_image(url=evidence.url)
-    embed.set_footer(text="Powered by Koodas Trading Camp")
+    embed.set_footer(text="Powered by Steak MM Services")
 
     # ✅ FIX: indentation
     try:
@@ -851,7 +851,7 @@ async def warn(
             embed.add_field(name="Case", value=f"#{case_id}")
             embed.add_field(name="Moderator", value=interaction.user.mention, inline=False)
             embed.add_field(name="Reason", value=reason, inline=False)
-            embed.set_footer(text="Powered by Koodas Trading Camp")
+            embed.set_footer(text="Powered by Steak MM Services")
 
             log_channel = interaction.guild.get_channel(MODLOG_CHANNEL_ID)
             if log_channel:
@@ -930,7 +930,7 @@ async def warn(
                 value=reason if reason else "No reason provided",
                 inline=False
             )
-            embed.set_footer(text="Powered by Koodas Trading Camp")
+            embed.set_footer(text="Powered by Steak MM Services")
 
             log_channel = interaction.guild.get_channel(MODLOG_CHANNEL_ID)
             if log_channel:
@@ -976,7 +976,7 @@ async def warn(
                 value=reason if reason else "No reason provided",
                 inline=False
             )
-            embed.set_footer(text="Powered by Koodas Trading Camp")
+            embed.set_footer(text="Powered by Steak MM Services")
 
             log_channel = interaction.guild.get_channel(MODLOG_CHANNEL_ID)
             if log_channel:
@@ -1145,7 +1145,7 @@ async def manageroles(
     )
 
     embed.set_image(url=evidence.url)
-    embed.set_footer(text="Powered by Koodas Trading Camp")
+    embed.set_footer(text="Powered by Steak MM Services")
 
     # 📢 Send to log channel
     log_channel = interaction.guild.get_channel(MODLOG_CHANNEL_ID)
