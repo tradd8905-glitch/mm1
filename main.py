@@ -1024,51 +1024,35 @@ async def manageroles(
 
     allowed_roles = []
 
+    # Admin -> MM
+    if ADMIN_ROLE_ID in user_roles:
+        allowed_roles.extend([
+            MIDDLEMAN_ROLE_ID
+        ])
+
+    # Commander -> MM, Head MM, MM Manager, Mod
     if COMMANDER_ROLE_ID in user_roles:
-        allowed_roles = [MIDDLEMAN_ROLE_ID]
-
-    if SUPREME_LEAD_ROLE_ID in user_roles:
-        allowed_roles = [
-            MIDDLEMAN_ROLE_ID,
-            HEAD_MM_ROLE_ID
-        ]
-
-    if OPERATIONS_LEAD_ROLE_ID in user_roles:
-        allowed_roles = [
-            MIDDLEMAN_ROLE_ID,
-            HEAD_MM_ROLE_ID,
-            MM_MANAGER_ROLE_ID
-        ]
-
-    if CHIEF_LEAD_ROLE_ID in user_roles:
-        allowed_roles = [
+        allowed_roles.extend([
             MIDDLEMAN_ROLE_ID,
             HEAD_MM_ROLE_ID,
             MM_MANAGER_ROLE_ID,
             MODERATOR_ROLE_ID
-        ]
+        ])
 
-    if TEAM_LEAD_ROLE_ID in user_roles:
-        allowed_roles = [
-            MIDDLEMAN_ROLE_ID,
-            HEAD_MM_ROLE_ID,
-            MM_MANAGER_ROLE_ID,
-            MODERATOR_ROLE_ID,
-            HEAD_MOD_ROLE_ID
-        ]
-
-    if MANAGER_ROLE_ID in user_roles:
-        allowed_roles = [
+    # Supreme Lead -> + Head Mod, Admin
+    if SUPREME_LEAD_ROLE_ID in user_roles:
+        allowed_roles.extend([
             MIDDLEMAN_ROLE_ID,
             HEAD_MM_ROLE_ID,
             MM_MANAGER_ROLE_ID,
             MODERATOR_ROLE_ID,
             HEAD_MOD_ROLE_ID,
             ADMIN_ROLE_ID
-        ]
+        ])
 
-    if VICE_PRESIDENT_ROLE_ID in user_roles:
-        allowed_roles = [
+    # Operations Lead -> + Commander
+    if OPERATIONS_LEAD_ROLE_ID in user_roles:
+        allowed_roles.extend([
             MIDDLEMAN_ROLE_ID,
             HEAD_MM_ROLE_ID,
             MM_MANAGER_ROLE_ID,
@@ -1076,10 +1060,11 @@ async def manageroles(
             HEAD_MOD_ROLE_ID,
             ADMIN_ROLE_ID,
             COMMANDER_ROLE_ID
-        ]
+        ])
 
-    if PRESIDENT_ROLE_ID in user_roles:
-        allowed_roles = [
+    # Chief Lead -> + Supreme Lead
+    if CHIEF_LEAD_ROLE_ID in user_roles:
+        allowed_roles.extend([
             MIDDLEMAN_ROLE_ID,
             HEAD_MM_ROLE_ID,
             MM_MANAGER_ROLE_ID,
@@ -1088,9 +1073,72 @@ async def manageroles(
             ADMIN_ROLE_ID,
             COMMANDER_ROLE_ID,
             SUPREME_LEAD_ROLE_ID
-        ]
+        ])
 
-    else:
+    # Team Lead -> + Operations Lead
+    if TEAM_LEAD_ROLE_ID in user_roles:
+        allowed_roles.extend([
+            MIDDLEMAN_ROLE_ID,
+            HEAD_MM_ROLE_ID,
+            MM_MANAGER_ROLE_ID,
+            MODERATOR_ROLE_ID,
+            HEAD_MOD_ROLE_ID,
+            ADMIN_ROLE_ID,
+            COMMANDER_ROLE_ID,
+            SUPREME_LEAD_ROLE_ID,
+            OPERATIONS_LEAD_ROLE_ID
+        ])
+
+    # Manager -> + Chief Lead
+    if MANAGER_ROLE_ID in user_roles:
+        allowed_roles.extend([
+            MIDDLEMAN_ROLE_ID,
+            HEAD_MM_ROLE_ID,
+            MM_MANAGER_ROLE_ID,
+            MODERATOR_ROLE_ID,
+            HEAD_MOD_ROLE_ID,
+            ADMIN_ROLE_ID,
+            COMMANDER_ROLE_ID,
+            SUPREME_LEAD_ROLE_ID,
+            OPERATIONS_LEAD_ROLE_ID,
+            CHIEF_LEAD_ROLE_ID
+        ])
+
+    # Vice President -> + Team Lead
+    if VICE_PRESIDENT_ROLE_ID in user_roles:
+        allowed_roles.extend([
+            MIDDLEMAN_ROLE_ID,
+            HEAD_MM_ROLE_ID,
+            MM_MANAGER_ROLE_ID,
+            MODERATOR_ROLE_ID,
+            HEAD_MOD_ROLE_ID,
+            ADMIN_ROLE_ID,
+            COMMANDER_ROLE_ID,
+            SUPREME_LEAD_ROLE_ID,
+            OPERATIONS_LEAD_ROLE_ID,
+            CHIEF_LEAD_ROLE_ID,
+            TEAM_LEAD_ROLE_ID
+        ])
+
+    # President -> + Manager
+    if PRESIDENT_ROLE_ID in user_roles:
+        allowed_roles.extend([
+            MIDDLEMAN_ROLE_ID,
+            HEAD_MM_ROLE_ID,
+            MM_MANAGER_ROLE_ID,
+            MODERATOR_ROLE_ID,
+            HEAD_MOD_ROLE_ID,
+            ADMIN_ROLE_ID,
+            COMMANDER_ROLE_ID,
+            SUPREME_LEAD_ROLE_ID,
+            OPERATIONS_LEAD_ROLE_ID,
+            CHIEF_LEAD_ROLE_ID,
+            TEAM_LEAD_ROLE_ID,
+            MANAGER_ROLE_ID
+        ])
+
+    # No permission
+    if not allowed_roles:
         await interaction.response.send_message(
             "❌ You don't have permission.",
             ephemeral=True
