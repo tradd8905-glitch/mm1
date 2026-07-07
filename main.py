@@ -782,10 +782,8 @@ async def manageban(
     if log_channel:
         await log_channel.send(embed=embed)
 
-    await interaction.response.send_message(
-        f"✅ {action.value.capitalize()} done for {target}",
-        ephemeral=True
-    )
+    await   interaction.response.send_message(embed=embed)
+    
            
 @bot.tree.command(name="warn", description="Moderation warn system")
 @app_commands.describe(
