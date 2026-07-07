@@ -473,7 +473,7 @@ async def middleman1(interaction: discord.Interaction):
 
 # ---------------- VOUCH COMMAND WITH LOG CHANNEL ----------------
 
-VOUCH_LOG_CHANNEL_ID = 1471191263146541243  # <-- Replace with your channel ID
+VOUCH_LOG_CHANNEL_ID = 1516135666843648051  # <-- Replace with your channel ID
 
 @bot.tree.command(name="vouch", description="Give a vouch to a user")
 @app_commands.describe(user="The user being vouched", reason="Reason for the vouch")
