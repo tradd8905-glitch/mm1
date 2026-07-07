@@ -864,7 +864,7 @@ async def warn(
             )
 
         # ------------------ SHOW WARNINGS ------------------
-                elif action.value == "warnings":
+        elif action.value == "warnings":
             if not user:
                 await interaction.response.send_message(
                     "❌ You must provide a user to check warnings.",
