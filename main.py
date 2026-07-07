@@ -1209,11 +1209,8 @@ async def manageroles(
         await log_channel.send(embed=embed)
 
     # ✅ Confirmation
-    await interaction.response.send_message(
-        f"✅ Done for {target.mention}",
-        ephemeral=True
-    )
-
+    await interaction.response.send_message(embed=embed)
+                    
 @bot.command()
 async def sync(ctx):
     synced = await bot.tree.sync()
