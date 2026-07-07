@@ -13,7 +13,9 @@ OWNER_ROLE_ID = 1516135256300720179
 LOG_CHANNEL_ID = 1516135874037809223
 VERIFY_ROLE_ID = 1522021614819082350
 BAN_ROLE_ID = 1516141492203425873
-MODLOG_CHANNEL_ID = 1516135841301401691
+MODLOG_CHANNEL_ID = 1516135879419236383
+WARN_LOG_CHANNEL_ID = 1524049393748017152
+ROLE_LOG_CHANNEL_ID = 1516135884821627010
 ADMIN_ROLE_ID = 1516141076384190494
 PRESIDENT_ROLE_ID = 1516135294397579439
 HEAD_MM_ROLE_ID = 1516135424949751928
@@ -852,7 +854,7 @@ async def warn(
             embed.add_field(name="Reason", value=reason, inline=False)
             embed.set_footer(text="Powered by Gag/Blox Fruits MM Bot")
 
-            log_channel = interaction.guild.get_channel(MODLOG_CHANNEL_ID)
+            log_channel = interaction.guild.get_channel(WARN_LOG_CHANNEL_ID)
             if log_channel:
                 await log_channel.send(embed=embed)
 
@@ -931,7 +933,7 @@ async def warn(
             )
             embed.set_footer(text="Powered by Gag/Blox Fruits MM Bot")
 
-            log_channel = interaction.guild.get_channel(MODLOG_CHANNEL_ID)
+            log_channel = interaction.guild.get_channel(WARN_LOG_CHANNEL_ID)
             if log_channel:
                 await log_channel.send(embed=embed)
 
@@ -977,7 +979,7 @@ async def warn(
             )
             embed.set_footer(text="Powered by Gag/Blox Fruits MM Bot")
 
-            log_channel = interaction.guild.get_channel(MODLOG_CHANNEL_ID)
+            log_channel = interaction.guild.get_channel(WARN_LOG_CHANNEL_ID)
             if log_channel:
                 await log_channel.send(embed=embed)
 
@@ -1169,7 +1171,7 @@ async def manageroles(
     embed.set_footer(text="Powered by Gag/Blox Fruits MM Bot")
 
     # 📢 Send to log channel
-    log_channel = interaction.guild.get_channel(MODLOG_CHANNEL_ID)
+    log_channel = interaction.guild.get_channel(ROLE_LOG_CHANNEL_ID)
     if log_channel:
         await log_channel.send(embed=embed)
 
