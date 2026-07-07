@@ -856,11 +856,8 @@ async def warn(
             if log_channel:
                 await log_channel.send(embed=embed)
 
-            await interaction.response.send_message(
-                f"✅ {user.mention} has been warned.",
-                ephemeral=True
-            )
-
+            await interaction.response.send_message(embed=embed)
+                                        
         # ------------------ SHOW WARNINGS ------------------
         elif action.value == "warnings":
             if not user:
@@ -921,11 +918,8 @@ async def warn(
             if log_channel:
                 await log_channel.send(embed=log_embed)
 
-            await interaction.response.send_message(
-                embed=embed,
-                ephemeral=True
-            )
-    
+            await interaction.response.send_message(embed=embed)
+                                                
                 
         # ------------------ DELETE WARN ------------------
         elif action.value == "delwarn":
@@ -970,11 +964,8 @@ async def warn(
             if log_channel:
                 await log_channel.send(embed=embed)
 
-            await interaction.response.send_message(
-                f"✅ Warn case #{case} removed.",
-                ephemeral=True
-            )
-
+            await interaction.response.send_message(embed=embed)
+                           
         # ------------------ CLEAR WARNS ------------------
         elif action.value == "clearwarn":
             if not user:
@@ -1016,10 +1007,7 @@ async def warn(
             if log_channel:
                 await log_channel.send(embed=embed)
 
-            await interaction.response.send_message(
-                f"✅ Cleared {removed} warn(s) for {user.mention}.",
-                ephemeral=True
-            )
+            await interaction.response.send_message(embed=embed)                        
 
 from datetime import datetime
 
