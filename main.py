@@ -293,7 +293,7 @@ async def middleman(interaction: discord.Interaction):
     # Check if user has the middleman role
     if role not in interaction.user.roles:
         await interaction.response.send_message(
-            "❌ Only middlemen can use this command.",
+            "❌ Only middleman can use this command.",
             ephemeral=True
         )
         return
@@ -550,7 +550,6 @@ async def vouch(interaction: discord.Interaction, user: discord.Member, reason: 
 
 # ---------------- VERIFY SYSTEM ----------------
 
-MIDDLEMAN_ROLE_ID = 1471646465855062106 # replace with your middleman role id
 
 class VerifyView(discord.ui.View):
     def __init__(self, user: discord.Member):
