@@ -864,7 +864,7 @@ async def warn(
             )
 
         # ------------------ SHOW WARNINGS ------------------
-        elif action.value == "warnings":
+                elif action.value == "warnings":
             if not user:
                 await interaction.response.send_message(
                     "❌ You must provide a user to check warnings.",
@@ -879,7 +879,10 @@ async def warn(
             rows = await cursor.fetchall()
 
             if not rows:
-                await interaction.response.send_message("No warnings found.", ephemeral=True)
+                await interaction.response.send_message(
+                    "No warnings found.",
+                    ephemeral=True
+                )
                 return
 
             text = ""
@@ -887,13 +890,45 @@ async def warn(
                 text += f"Case #{case_id}: {reason_text}\n"
 
             embed = discord.Embed(
-                title=f"{len(rows)} warn(s) for {user}",
+                title=f"{len(rows)} Warn(s) for {user}",
                 description=text,
                 color=discord.Color.blue()
             )
+            embed.set_footer(text="Powered by Gag/Blox Fruits MM Bot")
 
-            await interaction.response.send_message(embed=embed, ephemeral=True)
+            # Log to warn log channel
+            log_embed = discord.Embed(
+                title="📋 Warnings Checked",
+                color=discord.Color.blue(),
+                timestamp=datetime.utcnow()
+            )
+            log_embed.add_field(
+                name="Checked By",
+                value=interaction.user.mention,
+                inline=False
+            )
+            log_embed.add_field(
+                name="Target User",
+                value=user.mention,
+                inline=False
+            )
+            log_embed.add_field(
+                name="Warnings",
+                value=text,
+                inline=False
+            )
+            log_embed.set_footer(text="Powered by Gag/Blox Fruits MM Bot")
 
+            log_channel = interaction.guild.get_channel(WARN_LOG_CHANNEL_ID)
+            if log_channel:
+                await log_channel.send(embed=log_embed)
+
+            await interaction.response.send_message(
+                embed=embed,
+                ephemeral=True
+            )
+    
+                
         # ------------------ DELETE WARN ------------------
         elif action.value == "delwarn":
             if not case:
